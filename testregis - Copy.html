@@ -1,0 +1,98 @@
+﻿<html>
+<head>
+    <title>Registration Page</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+    <form class="form"  method="post" action="test.php">
+        <div class="container">
+            <div class="main">
+                <h2>Registration form</h2>
+                <br />
+                UserID : <input type="text" name="uid" id="uid">
+                <br />
+                First Name :<input type="text" name="ufname" id="ufname">
+                <br />
+                Larst Name :<input type="text" name="ulname" id="ulname">
+                <br />
+                Email :<input type="email" name="uemail" id="uemail">
+                <br />
+                Password :<input type="password"  name="password" id="password">
+                <br />
+                Confirm password : <input type="password" id="cpassword">
+                <br />
+                Gender :<input type="radio" name="gender" value="Male" onclick="genfunction(this.value)">Male &nbsp;
+                <input type="radio" name="gender" value="Female" onclick="genfunction(this.value)">Female
+                <br />
+                DateofBirth(YYYY/MM/DD) :<input type="text"name="dob" id="dob">
+                <br />
+                <input type="submit"  id="register" name="register" value="Register">
+                <br />
+                <input type="text" name="genresult" id="genresult" style="visibility:hidden" />
+                <br/>
+                <input type="text" id="adname" name="adname" value="" hidden>
+                <input type="text" id="adpass" name="adpass" value="" hidden>
+
+
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+        function genfunction(gender) {
+           document.getElementById("genresult").value = gender;
+        }
+         
+        function onloadfunction()
+        {
+            var adname;
+            var adpass;
+            var adnameget = prompt("Please enter database ID:", "TestAdmin1");
+            var adpassget = prompt("Please enter database password:", "TestAdmin1");
+            if (adnameget == null || adnameget == "") {
+                alert("Please enter vaild ID");
+            }
+            if (adpassget == null || adpassget == "") {
+                alert("Please enter vaild Password");
+            }
+            adname = adnameget;
+            adpass = adpassget;
+            document.getElementById("adname").defaultValue = adname;
+            document.getElementById("adpass").defaultValue = adpassget;
+            
+
+         }
+        window.onload = onloadfunction;
+        $(document).ready(function (){
+            $("#register").click(function () {
+                var getid = $("#adname").val();
+                var getpass = $("#adpass").val();
+                var uid = $("#uid").val();
+                var ufname = $("#ufname").val();
+                var uemail = $("#uemail").val();
+                var password = $("#password").val();
+                var cpassword = $("#cpassword").val();
+                var ulname = $("#ulname").val();
+                var dob = $("#dob").val();
+                var gend = $("#genresult").val();
+            
+                if (uid == '' || ufname == '' || uemail == '' || password == '' || cpassword == '' || ulname == '' || dob == '') {
+                    alert("Fill up the empty field la!");
+                    return false;
+                }
+                else if (gend == '') {
+                    alert("Please pick your gender!")
+                    return false;
+                }
+                else if ((password.length) < 7) {
+                    alert("Enter a password more than 7 laa");
+                    return false;
+                } else if (!(password).match(cpassword)) {
+                    alert("Your passwords don't match. Try again?");
+                    return false;
+                }
+            }
+       );
+        });
+    </script>
+</body>
+</html>
